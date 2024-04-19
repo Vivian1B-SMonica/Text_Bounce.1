@@ -1,0 +1,86 @@
+#import needed libraries  
+import turtle
+import random
+from turtle import *
+#from tkinter import *
+#from tkinter import ttk
+
+
+#Define constants
+RIGHT_EDGE= 200
+LEFT_EDGE = -200
+BOTTOM_EDGE = -200
+TOP_EDGE = 200
+BALL_SPEED = 5
+
+#Global variables
+screen = Screen()
+screen.title("My window")
+screen.bgcolor("white")
+Brainbow= ["red", "orange", "gold",
+           "green", "blue", "indigo",
+           "black", "purple2", "hotPink"]
+
+turtle = Turtle()
+my_name = Turtle()
+
+ranHead = (random.randint (45, 270))
+my_name.shape("triangle")
+my_name.position()
+my_name.speed(0)
+my_name.setheading(ranHead)
+
+def square (sidelen): #this function draws a square
+    for square in range (4):
+        turtle.forward(sidelen)
+        vpal=turtle.heading()
+        turtle.left(90)
+    return ()
+
+
+
+screen.tracer(0) #turn off auto screen updates to make it faster
+
+#Draw walls
+turtle.pensize(3)
+turtle.penup()
+turtle.goto(-210, -205)
+turtle.color("black")
+turtle.pendown()
+borders= square(425)
+
+bulk = False
+my_name.ht()
+#///\\\_Main code_///\\\
+while True:
+    screen.update()
+    my_name.write("Place_text", move=False, align='center', font=('Times New Roman', 18, 'normal'))
+    my_name.penup()
+    my_name.forward(3)
+    my_name.clear()
+    my_name.write("Place_text", move=False, align='center', font=('Times New Roman', 18, 'normal'))
+    
+    #Make the balls react to the walls  
+
+##   collisions // bounce inside the box
+    if (my_name.xcor()>=RIGHT_EDGE):
+        ranHead = (random.randint (100, 250))
+        bulk = True
+    if (my_name.xcor()<=LEFT_EDGE):
+        ranHead = (random.randint (280, 445))
+        bulk = True
+        
+#Random Top & Bottom course changes        
+    if (my_name.ycor()>=TOP_EDGE):
+        ranHead = (random.randint (200, 300))
+        bulk = True
+    if (my_name.ycor()<=BOTTOM_EDGE):
+        ranHead = (random.randint (5, 175))
+        bulk = True
+
+    if bulk==True:
+        my_name.clear()
+        my_name.color(random.choice(Brainbow)) #change color
+        my_name.seth(ranHead) #change ball direction
+
+    bulk = False
